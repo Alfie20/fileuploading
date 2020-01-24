@@ -1,28 +1,29 @@
 <?php 
-$targetDir ="uploads/";
-$fileName = basename($_FILES["file"]["name"]);
-$targetFilePath = $targetDir . $fileName;
-$fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
- 
-if(isset($_POST["submit"]) && !empty($_FILES["file"]["name"])){
-    $allowTypes = array('jpg','png','jpeg','gif','pdf');
-    
-    if(in_array($fileType,$allowTypes)){
-        if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
-            echo $fileName;
-            
-        }
-        else
-        {
-            echo"Failed to upload";
-        }
+    if(isset($_POST['upload'])){
+        $maxsize=1033414;
+        $format=array('image/jpeg');
+    if($_FILES['file_upload']['size']>=$maxsize){
+        $error_1='File Size too large';
+        echo '<script>alert("'.$error_1.'")</script>';
     }
-    else{
-        echo"File type not allowed";
+    elseif($_FILES['file_upload']['size']==0){
+        $error_2='Invalid File';
+        echo '<script>alert("'.$error_2.'")</script>';
+    }
+    elseif(!in_array($_FILES['file_upload']['type'],$format)){
+        $error_3='Format Not Supported.Only .jpeg files are accepted';
+        echo '<script>alert("'.$error_3.'")</script>';
+        }
 
-
-
-}
-
-}
+        else{
+            $target_dir = "uploads/";
+            $target_file = $target_dir . basename($_FILES["file_upload"]["name"]);
+            if(move_uploaded_file($_FILES["file_upload"]["tmp_name"], $target_file)){ 
+            echo "The file ". basename($_FILES["file_upload"]["name"]). " has been uploaded.";
+            }
+            else{
+                echo "sorry";
+                }
+            }
+    }
 ?>
