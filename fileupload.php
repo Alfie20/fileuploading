@@ -1,11 +1,15 @@
-
+<!DOCTYPE html>
 <html>
-   <body>
-      
-      <form method="post" action="uploadtoserver.php" enctype="multipart/form-data">
-         <input type="file" name="file" />
-         <input type="submit" value="upload" name="submit"/>
-      </form>
-      
-   </body>
+<head>
+	<title>uploading</title>
+</head>
+<body>
+
+<form action="uploadserver.php" method="post" enctype="multipart/form-data">
+<label>Upload An Image</label>
+<input type="file" name="file_upload" />
+<input type="submit" name="upload"/>
+</form>
+
+</body>
 </html>
